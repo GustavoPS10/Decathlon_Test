@@ -8,7 +8,7 @@ public class App_Main {
 		Xml_output c3 = new Xml_output();
 		c3.xml_creation();
 		System.out.println("XML generated");
-		System.out.println("Done and Done");
+		System.out.println("Done");
 	}
 
 }
