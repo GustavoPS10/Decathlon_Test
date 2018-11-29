@@ -32,12 +32,13 @@ public class Xml_output {
 
 	public void xml_creation() throws IOException {
 		
-		//Starts writing on the XML output
+		// Starts writing on the XML output
 		try (FileWriter fos = new FileWriter("results_OUTPUT.xml")) {
 			XMLOutputFactory f = XMLOutputFactory.newInstance();
 			XMLStreamWriter writer = f.createXMLStreamWriter(fos);
 			
-			//Lambda to Create an array of all total points from participants, and ordering them in ascendant order
+			// Lambda method to create an array of all total points from participants
+			// ordering them in ascendant order
 			c.complete_info().forEach(tp -> {
 				Totals_int.add(Integer.parseInt(tp.get(11)));
 			});
@@ -52,8 +53,9 @@ public class Xml_output {
 			for (int i = 0; i < c.complete_info().size(); i++) {
 				int p = i + 1;
 				
-				// We create linked hash map to create a relationship between Totals from everyone array, and Event performances from participants
-				// This is to bind together participant's performances to their respective grand total, enabling me to ordering participants in ascendant order
+				// Linked hash maps creates a relationship between Totals Points and Event performances
+				// for each participant. This is to bind together participant's performances to their respective Total Points 
+				// and having a way to output data depending of total points
 				for (int x = 0; x < c.complete_info().size(); x++) {
 					linked_totals1.put(Integer.parseInt(c.complete_info().get(x).get(11)), c.complete_info().get(x).get(0));
 					linked_totals2.put(Integer.parseInt(c.complete_info().get(x).get(11)), c.complete_info().get(x).get(1));
@@ -68,7 +70,7 @@ public class Xml_output {
 					linked_totals11.put(Integer.parseInt(c.complete_info().get(x).get(11)), c.complete_info().get(x).get(10));
 				}
 				
-				// Start of Participant tag
+				// Opening tag of Participants
 				writer.writeStartElement("Participants");
 
 				// Name of Participant

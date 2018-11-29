@@ -2,7 +2,9 @@ package DECATHLON.Test;
 
 public class Events_point_calculator {
 	
-	//These 3 arrays are the values necessary to calculate points, P comes from the actual performance and it's grabbed from the CSV main array
+	// These 3 arrays are the values necessary to calculate points 
+	// P comes from the actual performance and it's grabbed from the CSV main array
+	
 	final double[] A = new double[]{25.4347,0.14354,51.39,0.8465,1.53775,5.74352,12.91,0.2797,10.14,0.03768};
 	final double[] B = new double[]{18,220,1.5,75,82,28.5,4,100,7,480};
 	final double[] C = new double[]{1.81,1.4,1.05,1.42,1.81,1.92,1.1,1.35,1.08,1.85};
@@ -12,7 +14,7 @@ public class Events_point_calculator {
 	}
 	
 	public int long_jump(Double P) {
-		// Formula asks for meters, performance gives centimeters, have to multiply it to 100	
+		// Formula asks for meters and performance gives centimeters, so this should be multiplied to 100
 		return (int) (A[1]* Math.pow(((P*100)-B[1]),C[1]));
 	}
 	
@@ -21,7 +23,7 @@ public class Events_point_calculator {
 	}
 	
 	public int high_jump(Double P) {
-		// Formula asks for meters, performance gives centimeters, have to multiply it to 100
+		// Formula asks for meters and performance gives centimeters, so this should be multiplied to 100
 		return (int) (A[3]* Math.pow(((P*100)-B[3]),C[3]));
 	}
 	
@@ -38,7 +40,7 @@ public class Events_point_calculator {
 	}
 	
 	public int pole_vault(Double P) {
-		// Formula asks for meters, performance gives centimeters, have to multiply it to 100
+		// Formula asks for meters and performance gives centimeters, so this should be multiplied to 100
 		return (int) (A[7]* Math.pow(((P*100)-B[7]),C[7]));
 	}
 	
@@ -52,7 +54,7 @@ public class Events_point_calculator {
 		Double min = Double.parseDouble(S.substring(0, S.indexOf(".")));
 		Double sec = Double.parseDouble(S.substring(S.indexOf(".")+1, S.length()));
 		
-		// Multiplies minutes * 60 and adds up Seconds, to have total seconds and make the to formula work
+		// Multiplies minutes * 60 and adds up remaining seconds. Having total seconds now formula works
     	Double P = (min * 60) + sec;
     	
     	return (int) (A[9]* Math.pow((B[9]-P),C[9]));
