@@ -37,25 +37,20 @@ public class Xml_output {
 			XMLOutputFactory f = XMLOutputFactory.newInstance();
 			XMLStreamWriter writer = f.createXMLStreamWriter(fos);
 			
-			// Lambda method to create an array of all total points from participants
-			// ordering them in ascendant order
+			// Lambda method creates an array with all total points from each participant
 			c.complete_info().forEach(tp -> {
 				Totals_int.add(Integer.parseInt(tp.get(11)));
 			});
+			// Orders totals in ascendant order
 			Collections.sort(Totals_int);
 			Collections.reverse(Totals_int);
 
-			// Starts XML document
-			writer.writeCharacters(System.getProperty("line.separator"));
-			writer.writeCharacters(System.getProperty("line.separator"));
-			
 			// Loop to insert participant data from CSV starts here
 			for (int i = 0; i < c.complete_info().size(); i++) {
 				int p = i + 1;
 				
-				// Linked hash maps creates a relationship between Totals Points and Event performances
-				// for each participant. This is to bind together participant's performances to their respective Total Points 
-				// and having a way to output data depending of total points
+				// Linked hash maps creates a relationship between total points and individual event points
+				// for each participant. This makes possible to retrieve any value using Total Points integer as Key 
 				for (int x = 0; x < c.complete_info().size(); x++) {
 					linked_totals1.put(Integer.parseInt(c.complete_info().get(x).get(11)), c.complete_info().get(x).get(0));
 					linked_totals2.put(Integer.parseInt(c.complete_info().get(x).get(11)), c.complete_info().get(x).get(1));
@@ -86,11 +81,11 @@ public class Xml_output {
 				// Placements
 				writer.writeStartElement("Placement");
 				if (p == 2) {
-					writer.writeCharacters("Runner up in " + p + "nd Place!!");
+					writer.writeCharacters("Runner up in " + p + "nd Place");
 				} else if (p >= 3) {
-					writer.writeCharacters("In " + p + "th Place!!");
+					writer.writeCharacters("In " + p + "th Place");
 				} else if (p == 1) {
-					writer.writeCharacters("The Champion!!! In " + p + "st Place!!");
+					writer.writeCharacters("The Champion In " + p + "st Place");
 				}
 				writer.writeEndElement();
 
@@ -210,6 +205,7 @@ public class Xml_output {
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
 		}
+		
 	}
 }
 
